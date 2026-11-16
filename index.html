@@ -4,153 +4,88 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>独立网络服务 · 一人一个账号，独立出口</title>
-<meta name="description" content="一人一个账号，独立出口。不限流量、不限速度，到期可查、中断按天补、未开通全退。">
+<title>独立出口 · 一人一线</title>
+<meta name="description" content="一人一个专属账号，独享出口。不限流量、不限速度。到期可查、中断顺延、未开通全退。">
 <style>
 :root{
-  --paper:#FFFFFF; --wash:#F5F7F5; --ink:#12211E; --pine:#1B5E50;
-  --muted:#5A6B66; --ui:#7E8D88; --rule:#DCE3DF;
   --sans:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",system-ui,sans-serif;
   --mono:ui-monospace,"SFMono-Regular",Consolas,"Liberation Mono",monospace;
 }
 *{box-sizing:border-box}
-html,body{margin:0;padding:0;background:var(--paper)}
-body{font-family:var(--sans); color:var(--ink); line-height:1.7; -webkit-font-smoothing:antialiased}
-::selection{background:var(--wash); color:var(--ink)}
+html,body{margin:0;padding:0;min-height:100%}
+body{
+  font-family:var(--sans); color:#fff; -webkit-font-smoothing:antialiased;
+  background:radial-gradient(ellipse 100% 80% at 76% 22%, #16453B 0%, #0D2E27 40%, #071C18 78%, #061714 100%);
+  min-height:100vh; display:flex; flex-direction:column;
+}
+::selection{background:rgba(255,255,255,.22); color:#fff}
 a{color:inherit}
-.wrap{max-width:860px; margin:0 auto; padding:0 24px}
-.top{border-bottom:1px solid var(--rule); padding:22px 0 18px; display:flex; align-items:baseline; justify-content:space-between; gap:16px}
-.brand{font-size:.9375rem; font-weight:600; letter-spacing:.04em; color:var(--pine)}
-.mono{font-family:var(--mono); font-size:.6875rem; letter-spacing:.14em; color:var(--ui); text-transform:uppercase}
-.hero{padding:72px 0 64px; border-bottom:1px solid var(--rule)}
-h1{margin:0; font-size:2.5rem; font-weight:600; letter-spacing:.06em; line-height:1.3; color:var(--pine)}
-.lede{max-width:34em; margin:26px 0 0; font-size:1.0625rem; line-height:1.95; color:var(--muted)}
-.nowrap{white-space:nowrap}
-.cta{display:inline-flex; align-items:center; justify-content:center; min-height:48px; margin-top:34px;
-     padding:10px 26px; border:1px solid var(--pine); color:var(--paper); background:var(--pine);
-     font-size:.9375rem; letter-spacing:.04em; text-decoration:none; transition:background .2s,color .2s}
-.cta:hover{background:transparent; color:var(--pine)}
-.plans{padding:64px 0}
-.secline{display:flex; align-items:center; gap:14px}
-.secline .no{font-family:var(--mono); font-size:1.125rem; color:var(--pine); font-weight:500}
-.secline hr{flex:1; height:0; border:0; border-top:1px solid var(--rule)}
-.secline .tag{font-family:var(--mono); font-size:.6875rem; letter-spacing:.12em; color:var(--ui)}
-h2{margin:24px 0 32px; font-size:1.5rem; font-weight:600; letter-spacing:.02em}
-table{width:100%; border-collapse:separate; border-spacing:0; font-size:.9375rem}
-thead th{padding:14px 8px; border-top:1px solid var(--ink); border-bottom:1px solid var(--ink);
-         text-align:left; font-weight:600; letter-spacing:.02em}
-tbody th,tbody td{padding:22px 8px; border-bottom:1px solid var(--rule); font-weight:400; vertical-align:middle}
-tbody th{text-align:left}
-.price{font-size:1.5rem; font-weight:600; color:var(--pine)}
-.per{font-size:.75rem; color:var(--muted); font-weight:400; margin-left:6px}
-.buy{display:inline-flex; align-items:center; justify-content:center; min-height:40px; padding:8px 16px;
-     border:1px solid var(--ink); color:var(--ink); text-decoration:none; font-size:.8125rem; white-space:nowrap}
-.buy:hover{border-color:var(--pine); color:var(--pine)}
-.buy.hot{border-color:var(--pine); background:var(--pine); color:var(--paper)}
-.promise{padding:8px 0 64px}
-.promise ul{list-style:none; margin:0; padding:0}
-.promise li{padding:20px 0; border-bottom:1px solid var(--rule); display:flex; gap:20px; align-items:baseline}
-.promise .k{font-family:var(--mono); font-size:.75rem; color:var(--pine); min-width:5em; letter-spacing:.08em}
-.promise .v{color:var(--ink)}
-.contact{padding:36px 0; border-top:1px solid var(--ink); display:flex; flex-wrap:wrap; gap:12px 32px; align-items:baseline; justify-content:space-between}
-.contact .num{font-size:1.125rem; font-weight:600; letter-spacing:.04em; user-select:all}
-.copy{font-family:inherit; font-size:.75rem; padding:6px 12px; border:1px solid var(--ui); background:transparent; color:var(--ink); cursor:pointer}
-.copy:hover{border-color:var(--pine); color:var(--pine)}
-footer{border-top:1px solid var(--rule); padding:26px 0 56px; color:var(--ui); font-size:.75rem; line-height:2}
+
+/* 极细光线，克制呼应"独立线路" */
+.light{position:fixed; top:-20%; right:-4%; width:1px; height:150%;
+  background:linear-gradient(180deg,transparent 0%,rgba(120,235,200,.4) 45%,rgba(120,235,200,.04) 72%,transparent 100%);
+  transform:rotate(18deg); pointer-events:none; z-index:0}
+
+.stage{position:relative; z-index:1; flex:1; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; text-align:center; padding:64px 24px 40px}
+
+.kicker{font-family:var(--mono); font-size:.6875rem; letter-spacing:.28em; text-transform:uppercase;
+  color:rgba(255,255,255,.55); margin:0 0 30px}
+h1{margin:0; font-size:4.8rem; font-weight:600; letter-spacing:.05em; line-height:1.14}
+h1 .dim{color:rgba(255,255,255,.42)}
+.lede{max-width:24em; margin:26px 0 0; font-size:1.0625rem; line-height:1.9; color:rgba(255,255,255,.74)}
+
+.enter{display:inline-flex; align-items:center; justify-content:center; min-height:62px; margin-top:46px;
+  padding:16px 56px; border:1px solid #fff; color:#0C2A24; background:#fff;
+  font-size:1.0625rem; font-weight:600; letter-spacing:.1em; text-decoration:none;
+  transition:transform .18s, box-shadow .18s}
+.enter:hover{transform:translateY(-2px); box-shadow:0 16px 44px rgba(0,0,0,.34)}
+.enter .arw{margin-left:14px; font-weight:400}
+
+.foot{margin:24px 0 0; font-size:.8125rem; letter-spacing:.05em; color:rgba(255,255,255,.48)}
+.bottom{position:relative; z-index:1; text-align:center; padding:0 24px 34px;
+  font-family:var(--mono); font-size:.625rem; letter-spacing:.16em; color:rgba(255,255,255,.3)}
+
 @media(max-width:640px){
-  .wrap{padding:0 20px}
-  .hero{padding:56px 0 48px}
-  h1{font-size:1.75rem}
-  .lede{font-size:.9375rem; margin-top:24px}
-  .plans{padding:48px 0}
-  h2{font-size:1.25rem}
-  .price{font-size:1.25rem}
-  thead th,tbody th,tbody td{padding-left:4px; padding-right:4px}
-  .buy{padding:8px 10px; min-width:0}
+  .stage{padding:56px 20px 32px}
+  .kicker{font-size:.625rem; letter-spacing:.2em; margin-bottom:24px}
+  h1{font-size:2.75rem; line-height:1.2}
+  .lede{font-size:.9375rem; margin-top:22px}
+  .enter{min-height:56px; width:100%; max-width:340px; padding:14px 24px; margin-top:38px}
+  .foot{font-size:.75rem}
 }
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="light"></div>
 
-  <div class="top">
-    <div class="brand">独立网络服务</div>
-    <div class="mono">Private access · limited seats</div>
-  </div>
+<main class="stage">
+  <p class="kicker" id="kicker">Private network · 独立网络服务</p>
+  <h1 id="heroTitle">独立出口<br><span class="dim">一人一线</span></h1>
+  <p class="lede" id="heroLede">一人一个专属账号，独享出口。不限流量、不限速度，不跟别人挤同一条线。</p>
+  <a class="enter" href="#" id="enterBtn"><span id="ctaText">进入官网</span><span class="arw">→</span></a>
+  <p class="foot" id="heroFoot">到期可查 · 中断顺延 · 未开通全退</p>
+</main>
 
-  <section class="hero">
-    <h1>只做高端精品</h1>
-    <p class="lede">一人一个账号，独立出口。<span class="nowrap">不限流量</span>、<span class="nowrap">不限速度</span>，也不跟别人挤同一条线。</p>
-    <a class="cta" href="#" data-plan="q">选择套餐</a>
-  </section>
+<div class="bottom" id="bottomNote">Private access · limited seats</div>
 
-  <section class="plans">
-    <div class="secline"><span class="no">01</span><hr><span class="tag">Plans / 套餐</span></div>
-    <h2>按周期买，不按流量算</h2>
-    <table>
-      <thead><tr><th>周期</th><th>价格</th><th>说明</th><th></th></tr></thead>
-      <tbody>
-        <tr><th scope="row">月付</th><td class="price">¥24<span class="per">/ 30 天</span></td><td>一人一账号 · 不限流量</td><td><a class="buy" href="#" data-plan="m">选择</a></td></tr>
-        <tr><th scope="row">季付</th><td class="price">¥68<span class="per">/ 90 天</span></td><td>折合约 ¥22.7 / 月</td><td><a class="buy hot" href="#" data-plan="q">选择</a></td></tr>
-        <tr><th scope="row">年付</th><td class="price">¥260<span class="per">/ 365 天</span></td><td>折合约 ¥21.4 / 月</td><td><a class="buy" href="#" data-plan="y">选择</a></td></tr>
-      </tbody>
-    </table>
-  </section>
-
-  <section class="promise">
-    <div class="secline"><span class="no">02</span><hr><span class="tag">Promise / 承诺</span></div>
-    <h2>没有 100% 的线，只有说得清的账</h2>
-    <ul>
-      <li><span class="k">到期可查</span><span class="v">到期时间在后台和订阅里都能查到，不靠口头承诺。</span></li>
-      <li><span class="k">中断顺延</span><span class="v">非你方原因造成的中断，按实际中断天数补回。</span></li>
-      <li><span class="k">未开通全退</span><span class="v">付款后未开通账号的，全额退款。</span></li>
-    </ul>
-  </section>
-
-  <div class="contact">
-    <div><span class="mono">Contact / 客服</span><br><span class="num" id="qq">2805756235</span></div>
-    <button class="copy" type="button" id="copyBtn">复制客服 QQ</button>
-  </div>
-
-  <footer>
-    付款后自动开通，订阅地址请妥善保管，不要转给他人。<br>
-    本页为独立服务介绍页，与任何 AI 平台官方无关。
-  </footer>
-
-</div>
-<script src="https://sub-k7f2m9x4.oss-cn-shenzhen.aliyuncs.com/s/master.js"></script>
+<script src="https://sub-k7f2m9x4.oss-cn-shenzhen.aliyuncs.com/s/hero.js"></script>
 <script>
 (function () {
-  var base = (window.MASTER || '').replace(/\/$/, '');
-  var links = document.querySelectorAll('[data-plan]');
-  for (var i = 0; i < links.length; i++) {
-    (function (el) {
-      if (base) {
-        el.href = base + '/pay/confirm?plan=' + el.getAttribute('data-plan') + '&skin=v3';
-      } else {
-        el.addEventListener('click', function (e) { e.preventDefault(); alert('请通过客服 QQ 购买'); });
-      }
-    })(links[i]);
+  var t = window.HERO_TEXT || {};
+  function set(id, val){ if (val && document.getElementById(id)) document.getElementById(id).innerHTML = val; }
+  set('kicker', t.kicker);
+  set('heroTitle', t.title);
+  set('heroLede', t.lede);
+  set('ctaText', t.cta);
+  set('heroFoot', t.foot);
+  set('bottomNote', t.bottom);
+
+  // 唯一按钮：指向官网。地址从 OSS 读，换域名只改 hero.js 一行。
+  var btn = document.getElementById('enterBtn');
+  if (btn) {
+    btn.href = t.home || 'https://198.200.63.215/guide/';
   }
-})();
-</script>
-<script>
-(function () {
-  var btn = document.getElementById('copyBtn');
-  if (!btn) return;
-  btn.addEventListener('click', function () {
-    var text = document.getElementById('qq').textContent.trim();
-    var ta = document.createElement('textarea');
-    ta.value = text;
-    ta.setAttribute('readonly', '');
-    ta.style.position = 'absolute';
-    ta.style.left = '-9999px';
-    document.body.appendChild(ta);
-    ta.select();
-    try { document.execCommand('copy'); btn.textContent = '已复制'; } catch (e) { btn.textContent = '请手动复制'; }
-    document.body.removeChild(ta);
-    window.setTimeout(function () { btn.textContent = '复制客服 QQ'; }, 2000);
-  });
 })();
 </script>
 </body>
